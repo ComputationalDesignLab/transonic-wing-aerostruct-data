@@ -1,6 +1,6 @@
 # A High-Fidelity Aerostructural Dataset of Transonic Wings in Cruise Conditions
 
-This repository accompanies the aerostructural dataset available at the following link (insert link) and provides implementations that can be used to train machine learning (ML) models using the dataset to create aerodynamic and structural mechanics surrogate models. This is to demonstrate the usage of the dataset in performing ML-driven static aerostructural analysis of a transonic wing geometry. The code in this repository is also provided to reproduce the results presented in the paper associated with the Wing-MD dataset. The dataset should be downloaded from the provided link before proceeding further with the code.
+This repository accompanies the aerostructural dataset available at the following link (insert link) and provides implementations that can be used to train machine learning (ML) models using the dataset to create aerodynamic and structural mechanics surrogate models. This is to demonstrate the usage of the dataset in performing ML-driven static aerostructural analysis of a transonic wing geometry. The code in this repository is also provided to reproduce the results presented in the paper associated with the dataset. The dataset should be downloaded from the provided link before proceeding further with the code.
 
 ## Requirements
 
@@ -63,7 +63,7 @@ Running any of the runscripts will save a `.mat` file with the predictions of th
 
 ## Results
 
-The models achieve the following results when trained using the training and validation samples from the dataset and evaluated on the testing sample points. This is summarized from the results presented in the Wing-MD paper. These results represent the median performance across 10 different random initialization of the neural network parameters.
+The models achieve the following results when trained using the training and validation samples from the dataset and evaluated on the testing sample points. This is summarized from the results presented in the accompanying paper. These results represent the median performance across 10 different random initialization of the neural network parameters.
 
 #### Aerodynamics 
 | Model | NRMSE $C_p$ | $R^2$ $C_p$ | NRMSE $C_f$ | $R^2$ $C_f$ | NRMSE $C_D$ | $R^2$ $C_D$ | NRMSE $C_L$ | $R^2$ $C_L$ |
@@ -76,3 +76,6 @@ The models achieve the following results when trained using the training and val
 |---|---|---|
 | Autoencoder | $0.1138$ | $0.834$ |
 | POD | $0.1189$ | $0.76412$ |
+
+## Citation
+(ADD ARXIV CITATION)

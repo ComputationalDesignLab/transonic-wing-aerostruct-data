@@ -90,4 +90,14 @@ The models achieve the following results when trained using the training and val
 </p>
 
 ## Citation
-(ADD ARXIV CITATION)
+
+If you use the dataset or the ML training code in your research work, please cite the following preprint paper describing the dataset and ML modeling methodologies. This work describes the dataset generation, ML modeling and ML model evaluation. 
+
+```
+@misc{aerostructdataset2026,
+    title = {High-Fidelity Aerostructural Dataset of Transonic Wings in Cruise Conditions},
+    author = {Pavankumar Koratikere and Abhijnan Dikshit and Leifur Leifsson}
+    year = {2026},
+    url={},
+}
+```

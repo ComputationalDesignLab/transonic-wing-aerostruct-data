@@ -19,12 +19,12 @@ print(train_inds, len(val_inds), len(test_inds))
 
 # saving the split data
 train = {"x": x_data[train_inds], "fail": fail_data[train_inds]}
-savemat("./training_data_struct.mat", train)
+savemat("./data_preprocessing/training_data_struct.mat", train)
 
 val = {"x": x_data[val_inds], "fail": fail_data[val_inds]}
-savemat("./validation_data_struct.mat", val)
+savemat("./data_preprocessing/validation_data_struct.mat", val)
 
 test = {"x": x_data[test_inds], "fail": fail_data[test_inds], "indices": test_inds, "valid_test_inds": valid_test_inds}
-savemat("./testing_data_struct.mat", test)
+savemat("./data_preprocessing/testing_data_struct.mat", test)
 
 

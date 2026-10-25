@@ -34,14 +34,14 @@ def build_network(input_dim, hidden_dims, output_dim, activation):
 args = {"device": torch.device("cuda" if torch.cuda.is_available() else "cpu"), "dtype": torch.float32}
 
 # loading the training data
-data = loadmat("training_data_struct.mat")
+data = loadmat("./data_preprocessing/training_data_struct.mat")
 x_train = torch.tensor(data["x"], **args)
 y_train = torch.tensor(data["fail"], **args)
 x_data = x_train
 vector_data = y_train
 
 # loading the validation data
-val_data = loadmat("validation_data_struct.mat")
+val_data = loadmat("./data_preprocessing/validation_data_struct.mat")
 x_val = torch.tensor(val_data["x"], **args)
 y_val = torch.tensor(val_data["fail"], **args)
 
@@ -73,11 +73,11 @@ savemat(f"./results/auto/auto_nirom_training_latent_{int(arguments.seed)}.mat", 
 
 # importing the testing data
 if mode == "testing":
-    val_data = loadmat("testing_data_struct.mat")
+    val_data = loadmat("./data_preprocessing/testing_data_struct.mat")
     x_test = torch.tensor(val_data["x"], **args)
     y_test = torch.tensor(val_data["fail"], **args)
 elif mode == "ood":
-    test_data = loadmat("ood_samples_struct.mat")
+    test_data = loadmat("./data_preprocessing/ood_samples_struct.mat")
     x_test = torch.tensor(test_data["x"], **args)
     y_test = torch.tensor(test_data["failure"], **args)
 

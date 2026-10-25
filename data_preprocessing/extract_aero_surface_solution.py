@@ -15,7 +15,6 @@ for i in range(num_samples):
     if not os.path.exists(path):
         
         continue
-    print(i+1)
     with h5py.File(path, "r") as f:
         cp_list.append(f["CoefPressure"][()].reshape(-1,1))
         cf_list.append(f["SkinFrictionMagnitude"][()].reshape(-1,1))
@@ -38,5 +37,5 @@ y_data = y_data[valid_indices]
 
 # saving the data
 data = {"CoefPressure": cp_array, "SkinFrictionMagnitude": cf_array, "MeshPoints": mesh_array, "x": x_data, "y": y_data, "valid_indices": valid_indices}
-savemat("full_data_aero.mat", data)
+savemat("./data_preprocessing/full_data_aero.mat", data)
 

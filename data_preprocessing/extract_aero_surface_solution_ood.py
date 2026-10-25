@@ -1,26 +1,29 @@
 import os
-import pyvista as pv
+import h5py
 import numpy as np
 from scipy.io import loadmat, savemat
 
 # looping through all the files
 num_samples = 3
 dtype = "ood_samples"
-failure_list = []
+cp_list = []
+cf_list = []
 mesh_points = []
 valid_indices = []
 for i in range(num_samples):
-    path = f"./{dtype}/{i+1}/structural_solution.vtk"
+    path = f"./{dtype}/{i+1}/surface_outputs.hdf5"
     if not os.path.exists(path):
         continue
     print(i+1)
-    mesh = pv.read(path)
-    mesh_points.append(mesh.points)
-    failure_list.append(mesh.point_data["failure"])
-    
+    with h5py.File(path, "r") as f:
+        cp_list.append(f["CoefPressure"][()].reshape(-1,1))
+        cf_list.append(f["SkinFrictionMagnitude"][()].reshape(-1,1))
+        mesh_points.append(f["MeshPoints"][()])
     valid_indices.append(i)
 
-fail_array = np.stack(failure_list, axis=0)
+cp_array = np.stack(cp_list, axis=0)
+print(cp_array.shape)
+cf_array = np.stack(cf_list, axis=0)
 mesh_array = np.stack(mesh_points, axis=0)
 
 # loading the scalar data
@@ -33,7 +36,10 @@ y_data = np.hstack([scalar_data[k].reshape(-1,1) for k in target_keys if k in sc
 x_data = x_data[valid_indices]
 y_data = y_data[valid_indices]
 
+print(x_data.shape)
+print(y_data.shape)
+
 # saving the data
-data = {"failure": fail_array, "MeshPoints": mesh_array, "x": x_data, "y": y_data, "valid_indices":valid_indices}
-savemat(f"ood_samples_struct.mat", data)
+data = {"CoefPressure": cp_array, "SkinFrictionMagnitude": cf_array, "MeshPoints": mesh_array, "x": x_data, "y": y_data, "valid_indices": valid_indices}
+savemat(f"./data_preprocessing/ood_samples_aero.mat", data)
 

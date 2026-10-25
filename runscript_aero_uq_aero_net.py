@@ -34,7 +34,7 @@ def build_network(input_dim, hidden_dims, output_dim, activation):
 args = {"device": torch.device("cuda" if torch.cuda.is_available() else "cpu"), "dtype": torch.float32}
 
 # loading the training data
-data = loadmat("training_data_aero.mat")
+data = loadmat("./data_preprocessing/training_data_aero.mat")
 x_train = torch.tensor(data["x"], **args)
 h_train = torch.tensor(np.hstack([data["cp"], data["cf"]]), **args).flatten(1)
 y_train = torch.tensor(np.hstack([data["cl"], data["cd"], data["cm"]]), **args)
@@ -43,7 +43,7 @@ vector_data = h_train
 coeff_data = y_train
 
 # loading the validation data
-val_data = loadmat("validation_data_aero.mat")
+val_data = loadmat("./data_preprocessing/validation_data_aero.mat")
 x_val = torch.tensor(val_data["x"], **args)
 h_val = torch.tensor(np.hstack([val_data["cp"], val_data["cf"]]), **args).flatten(1)
 y_val = torch.tensor(np.hstack([val_data["cl"], val_data["cd"], val_data["cm"]]), **args)
@@ -77,12 +77,12 @@ savemat(f"./results/aero/uq_aero_net_training_latent_{int(arguments.seed)}.mat",
 
 # importing the testing data
 if mode == "testing":
-    test_data = loadmat("testing_data_aero.mat")
+    test_data = loadmat("./data_preprocessing/testing_data_aero.mat")
     x_test = torch.tensor(test_data["x"], **args)
     h_test = torch.tensor(np.hstack([test_data["cp"], test_data["cf"]]), **args).flatten(1)
     y_test = torch.tensor(np.hstack([test_data["cl"], test_data["cd"], test_data["cm"]]), **args)
 elif mode == "ood":
-    test_data = loadmat("ood_samples_aero.mat")
+    test_data = loadmat("./data_preprocessing/ood_samples_aero.mat")
     x_test = torch.tensor(test_data["x"], **args)
     h_test = torch.tensor(np.hstack([test_data["CoefPressure"], test_data["SkinFrictionMagnitude"]]), **args).flatten(1)
     test_scalar_data = test_data["y"]

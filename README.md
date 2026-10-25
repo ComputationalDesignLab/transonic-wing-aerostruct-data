@@ -80,12 +80,12 @@ The models achieve the following results when trained using the training and val
 #### Visualizations of ML model predictions
 
 <p align="center">
-  <img src="/results_imgs/pressure_results.png" alt="Prediction of Cp and failure distribution from ML models" width="60%"><br>
+  <img src="/results_imgs/pressure_results.png" alt="Prediction of Cp and failure distribution from ML models" width="80%"><br>
   <small>Figure 1: Surface visualizations of the prediction of the surface pressure and wingbox failure distributions from the ML models.</small>
 </p>
 
 <p align="center">
-  <img src="/results_imgs/pressure_slices.png" alt="Sectinal slices of the surface Cp distribution from ML models" width="60%"><br>
+  <img src="/results_imgs/pressure_slices.png" alt="Sectinal slices of the surface Cp distribution from ML models" width="80%"><br>
   <small>Figure 2: Plots of sectional surface pressure distributions extracted from the ML model predictions and CFD testing data.</small>
 </p>
 

@@ -1,4 +1,4 @@
-# A High-Fidelity Aerostructural Dataset of Transonic Wings in Cruise Conditions
+# High-Fidelity Aerostructural Dataset of Transonic Wings in Cruise Conditions
 
 This repository accompanies the aerostructural dataset available on Hugging Face at the following [link](https://huggingface.co/datasets/computationaldesignlab/transonic-wing-aerostruct-dataset) and provides implementations that can be used to train machine learning (ML) models using the dataset to create aerodynamic and structural mechanics surrogate models. This is to demonstrate the usage of the dataset in performing ML-driven static aerostructural analysis of a transonic wing geometry. The code in this repository is also provided to reproduce the results presented in the paper associated with the dataset. The dataset should be downloaded from the provided link before proceeding further with the code.
 
@@ -48,16 +48,16 @@ This should split the data into approximately 80% training, 10% validation and 1
 The runscripts provided in the repository both train and evaluate the model using the normalized root mean squared error (NRMSE) on a per-point basis and the coefficient of determination ($R^2$) on a per-sample or per-point basis. These are the same error metrics that are used in the paper and described in its appendix. The following command can be run to execute any one of the runscripts to train and evaluate a model. Here, it is important to remember to provide the seed for the initialization of the neural networks and the testing mode (testing or ood) as arguments in the command line when running the script. In the paper, 10 repetitions of the model training and evaluation were run with the seed varying from 1 to 10.  
 
 ```
-python ./runscripts/runscript_aero_mha_net.py --seed 1 --test_mode testing
+python runscript_aero_mha_net.py --seed 1 --test_mode testing
 ```
 The correspondence between the runscripts and the models that were described in the paper is given in the following table. Here, NIROM refers to non-intrusive reduced order model.
 
 | Model | Runscript | 
 | -------- | -------- |
-| [MHA-Net](https://www.sciencedirect.com/science/article/pii/S1270963824000415) | `./runscripts/runscript_aero_mha_net.py` |
-| [UQAeroNet](https://arc.aiaa.org/doi/abs/10.2514/6.2026-1208)| `./runscripts/runscript_aero_uq_aero_net.py` |
-| Autoencoder NIROM |`./runscripts/runscript_struct_auto_nirom.py` | 
-| POD NIROM |`./runscripts/runscript_struct_pod_nirom.py`| 
+| [MHA-Net](https://www.sciencedirect.com/science/article/pii/S1270963824000415) | `runscript_aero_mha_net.py` |
+| [UQAeroNet](https://arc.aiaa.org/doi/abs/10.2514/6.2026-1208)| `runscript_aero_uq_aero_net.py` |
+| Autoencoder NIROM |`runscript_struct_auto_nirom.py` | 
+| POD NIROM |`runscript_struct_pod_nirom.py`| 
 
 Running any of the runscripts will save a `.mat` file with the predictions of the model for various physical quantities and the calculated error metrics for those physical quantities based on the testing data. This `.mat` file can then be used for visualizations or other postprocessing.
 
@@ -79,15 +79,15 @@ The models achieve the following results when trained using the training and val
 
 #### Visualizations of ML model predictions
 
-<figure align="center">
+<p align="center">
   <img src="/results_imgs/pressure_results.png" alt="Prediction of Cp and failure distribution from ML models" width="60%"><br>
-  <figcaption><small>Surface visualizations of the prediction of the surface pressure and wingbox failure distributions from the ML models.</small></figcaption>
-</figure>
+  <small>Figure 1: Surface visualizations of the prediction of the surface pressure and wingbox failure distributions from the ML models.</small>
+</p>
 
-<figure align="center">
+<p align="center">
   <img src="/results_imgs/pressure_slices.png" alt="Sectinal slices of the surface Cp distribution from ML models" width="60%"><br>
-  <figcaption><small>Plots of sectional surface pressure distributions extracted from the ML model predictions and CFD testing data.</small></figcaption>
-</figure>
+  <small>Figure 2: Plots of sectional surface pressure distributions extracted from the ML model predictions and CFD testing data.</small>
+</p>
 
 ## Citation
 (ADD ARXIV CITATION)

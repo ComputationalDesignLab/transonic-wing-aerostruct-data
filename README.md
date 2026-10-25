@@ -1,6 +1,6 @@
 # A High-Fidelity Aerostructural Dataset of Transonic Wings in Cruise Conditions
 
-This repository accompanies the aerostructural dataset available at the following link (insert link) and provides implementations that can be used to train machine learning (ML) models using the dataset to create aerodynamic and structural mechanics surrogate models. This is to demonstrate the usage of the dataset in performing ML-driven static aerostructural analysis of a transonic wing geometry. The code in this repository is also provided to reproduce the results presented in the paper associated with the dataset. The dataset should be downloaded from the provided link before proceeding further with the code.
+This repository accompanies the aerostructural dataset available on Hugging Face at the following [link](https://huggingface.co/datasets/computationaldesignlab/transonic-wing-aerostruct-dataset) and provides implementations that can be used to train machine learning (ML) models using the dataset to create aerodynamic and structural mechanics surrogate models. This is to demonstrate the usage of the dataset in performing ML-driven static aerostructural analysis of a transonic wing geometry. The code in this repository is also provided to reproduce the results presented in the paper associated with the dataset. The dataset should be downloaded from the provided link before proceeding further with the code.
 
 ## Requirements
 
@@ -21,43 +21,43 @@ Once the conda environment is set up with the correct dependencies, the given co
 Once the aerostructural dataset has been downloaded, the data from the individual folders must be consolidated for ease of training and evaluating the ML models. This can be done using scripts that are provided in this repository. To consolidate the data into `.mat` files that can be loaded to train and evaluate the ML models, the following commands can be used to run the relevant scripts.
 
 ```
-python extract_aero_solution.py
-python extract_struct_solution.py
+python ./data_preprocessing/extract_aero_solution.py
+python ./data_preprocessing/extract_struct_solution.py
 ```
 
 Similarly, the out-of-distribution (OOD) data can be extracted from the sample files using the following scripts and commands. 
 
 ```
-python extract_aero_solution_ood.py
-python extract_struct_solution_ood.py
+python ./data_preprocessing/extract_aero_solution_ood.py
+python ./data_preprocessing/extract_struct_solution_ood.py
 ```
 
->NOTE: Before running the above scripts, it is necessary to change the `path` variable within these scripts to point to the directory where the dataset is stored.
+>NOTE: Before running the above scripts, it is necessary to change the `path` variable within these scripts to point to the directory where the dataset is stored. It is preferable to use the absolute path where possible. 
 
-Running these scripts should produce `full_data_aero.mat`, and `full_data_struct.mat` within this same directory. Once these `.mat` files are generated, the aerodynamics and structures data can be split randomly into training, validation and testing data. This can be done using the following commands. 
+Running these scripts should produce `full_data_aero.mat`, and `full_data_struct.mat` within the `data_preprocessing` folder. Once these `.mat` files are generated, the aerodynamics and structures data can be split randomly into training, validation and testing data. This can be done using the following commands. 
 
 ```
-python split_data_aero.py
-python split_data_struct.py
+python ./data_preprocessing/split_data_aero.py
+python ./data_preprocessing/split_data_struct.py
 ```
 
-This should split the data into approximately 80% training, 10% validation and 10% testing data. Running these scripts should produce `training_data_aero.mat`, `training_data_struct.mat`, `testing_data_aero.mat`, `testing_data_struct.mat`, `validation_data_aero.mat`, and `validation_data_struct.mat`. After the data is split, the remaining scripts can be used to train and validate the models.    
+This should split the data into approximately 80% training, 10% validation and 10% testing data. Running these scripts should produce `training_data_aero.mat`, `training_data_struct.mat`, `testing_data_aero.mat`, `testing_data_struct.mat`, `validation_data_aero.mat`, and `validation_data_struct.mat` in the `data_preprocessing` folder. After the data is split, the remaining scripts can be used to train and validate the models.    
 
 ## Training and evaluating the models
 
 The runscripts provided in the repository both train and evaluate the model using the normalized root mean squared error (NRMSE) on a per-point basis and the coefficient of determination ($R^2$) on a per-sample or per-point basis. These are the same error metrics that are used in the paper and described in its appendix. The following command can be run to execute any one of the runscripts to train and evaluate a model. Here, it is important to remember to provide the seed for the initialization of the neural networks and the testing mode (testing or ood) as arguments in the command line when running the script. In the paper, 10 repetitions of the model training and evaluation were run with the seed varying from 1 to 10.  
 
 ```
-python runscript_aero_mha_net.py --seed 1 --test_mode testing
+python ./runscripts/runscript_aero_mha_net.py --seed 1 --test_mode testing
 ```
 The correspondence between the runscripts and the models that were described in the paper is given in the following table. Here, NIROM refers to non-intrusive reduced order model.
 
 | Model | Runscript | 
 | -------- | -------- |
-| [MHA-Net](https://www.sciencedirect.com/science/article/pii/S1270963824000415) | `runscript_aero_mha_net.py` |
-| [UQAeroNet](https://arc.aiaa.org/doi/abs/10.2514/6.2026-1208)| `runscript_aero_uq_aero_net.py` |
-| Autoencoder NIROM |`runscript_struct_auto_nirom.py` | 
-| POD NIROM |`runscript_struct_pod_nirom.py`| 
+| [MHA-Net](https://www.sciencedirect.com/science/article/pii/S1270963824000415) | `./runscripts/runscript_aero_mha_net.py` |
+| [UQAeroNet](https://arc.aiaa.org/doi/abs/10.2514/6.2026-1208)| `./runscripts/runscript_aero_uq_aero_net.py` |
+| Autoencoder NIROM |`./runscripts/runscript_struct_auto_nirom.py` | 
+| POD NIROM |`./runscripts/runscript_struct_pod_nirom.py`| 
 
 Running any of the runscripts will save a `.mat` file with the predictions of the model for various physical quantities and the calculated error metrics for those physical quantities based on the testing data. This `.mat` file can then be used for visualizations or other postprocessing.
 
@@ -76,6 +76,18 @@ The models achieve the following results when trained using the training and val
 |---|---|---|
 | Autoencoder | $0.1138$ | $0.834$ |
 | POD | $0.1189$ | $0.76412$ |
+
+#### Visualizations of ML model predictions
+
+<figure align="center">
+  <img src="/results_imgs/pressure_results.png" alt="Prediction of Cp and failure distribution from ML models" width="60%"><br>
+  <figcaption><small>Surface visualizations of the prediction of the surface pressure and wingbox failure distributions from the ML models.</small></figcaption>
+</figure>
+
+<figure align="center">
+  <img src="/results_imgs/pressure_slices.png" alt="Sectinal slices of the surface Cp distribution from ML models" width="60%"><br>
+  <figcaption><small>Plots of sectional surface pressure distributions extracted from the ML model predictions and CFD testing data.</small></figcaption>
+</figure>
 
 ## Citation
 (ADD ARXIV CITATION)

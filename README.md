@@ -66,7 +66,7 @@ Running any of the runscripts will save a `.mat` file with the predictions of th
 The models achieve the following results when trained using the training and validation samples from the dataset and evaluated on the testing sample points. This is summarized from the results presented in the accompanying paper. These results represent the median performance across 10 different random initialization of the neural network parameters.
 
 #### Aerodynamics 
-| Model | NRMSE $C_p$ | $C_p$ $R^2$ | NRMSE $C_f$ | $C_f$ $R^2$ | NRMSE $C_D$ | $C_D$ $R^2$ | NRMSE $C_L$ | $C_L$ $R^2$ |
+| Model | NRMSE $C_p$ | $R^2$ $C_p$ | NRMSE $C_f$ | $R^2$ $C_f$ | NRMSE $C_D$ | $R^2$ $C_D$ | NRMSE $C_L$ | $R^2$ $C_L$ |
 |---|---|---|---|---|---|---|---|---|
 | MHA-Net   | $0.0213$ | $0.9984$ | $0.0307$ | $0.9967$ | $0.0107$ | $0.9975$ | $0.0087$ | $0.9975$ |
 | UQAeroNet | $0.0212$ | $0.9984$ | $0.0309$ | $0.9968$ | $0.0109$ | $0.9974$ | $0.0084$ | $0.9977$ |
@@ -91,7 +91,7 @@ The models achieve the following results when trained using the training and val
 
 ## Citation
 
-If you use the dataset or the ML training code in your research work, please cite the following preprint paper describing the dataset and ML modeling methodologies. This work describes the dataset generation, ML modeling and ML model evaluation. 
+If you use the dataset or the ML training code in your research work, please cite the following preprint paper describing the dataset and ML modeling methodologies. This preprint describes the dataset generation, ML modeling and ML model evaluation. 
 
 ```
 @misc{aerostructdataset2026,

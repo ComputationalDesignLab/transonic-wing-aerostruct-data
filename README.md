@@ -91,13 +91,16 @@ The models achieve the following results when trained using the training and val
 
 ## Citation
 
-If you use the dataset or the ML training code in your research work, please cite the following preprint paper describing the dataset and ML modeling methodologies. This preprint describes the dataset generation, ML modeling and ML model evaluation. 
+If you use the dataset or the ML training code in your research work, please cite the following paper describing the dataset and ML modeling methodologies. This paper describes the dataset generation, ML modeling and ML model evaluation. 
 
 ```
-@misc{aerostructdataset2026,
-    title = {High-Fidelity Aerostructural Dataset of Transonic Wings in Cruise Conditions},
-    author = {Pavankumar Koratikere and Abhijnan Dikshit and Leifur Leifsson}
-    year = {2026},
-    url={},
+@misc{aerostructdata2026,
+      title={High-Fidelity Aerostructural Dataset of Transonic Wings in Cruise Conditions}, 
+      author={Pavankumar Koratikere and Abhijnan Dikshit and Leifur Leifsson},
+      year={2026},
+      eprint={2610.36442},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2610.36442}, 
 }
 ```
